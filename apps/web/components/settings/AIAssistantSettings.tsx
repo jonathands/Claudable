@@ -10,6 +10,18 @@ interface AIAssistantSettingsProps {
   onOpenGlobalSettings?: () => void;
 }
 
+/**
+ * Displays read-only AI assistant settings for a project: the selected CLI agent and model.
+ *
+ * Uses project preferences from the `useCLI` hook to determine the preferred CLI and model.
+ * If a model id is stored in preferences and the selected CLI exposes model metadata, the
+ * component shows the human-readable model name; otherwise it falls back to the model id
+ * or "Default Model" when none is selected.
+ *
+ * @param projectId - The project identifier whose AI assistant preferences are displayed.
+ * @param onOpenGlobalSettings - Optional callback invoked when the "Global Settings" button is clicked; when omitted the label renders as non-interactive text.
+ * @returns A React element showing the current CLI agent, configuration status, and model name.
+ */
 export function AIAssistantSettings({ projectId, onOpenGlobalSettings }: AIAssistantSettingsProps) {
   const { cliOptions, preference } = useCLI({ projectId });
 

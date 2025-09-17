@@ -39,6 +39,22 @@ interface SupabaseApiKeys {
   service_role: string;
 }
 
+/**
+ * Modal UI to connect a Supabase account, create a Supabase project, and wire it into the app.
+ *
+ * Renders a multi-step modal that accepts a Supabase Personal Access Token, lists organizations,
+ * allows configuring a new project (name, region, DB password), creates the project via the Supabase
+ * API, waits for activation, retrieves API keys, stores environment variables into the application,
+ * and registers a service connection for the created project. Handles loading/error states and closes
+ * the modal automatically after a successful connection.
+ *
+ * @param isOpen - Controls whether the modal is visible.
+ * @param onClose - Callback invoked to close the modal.
+ * @param projectId - Local project identifier used when saving environment variables and the service connection.
+ * @param projectName - Optional initial project name used to prefill the Project Name field.
+ * @param onSuccess - Callback invoked once the Supabase project has been created and configured successfully.
+ * @returns A JSX element for the modal or `null` when `isOpen` is false.
+ */
 export default function SupabaseModal({ isOpen, onClose, projectId, projectName, onSuccess }: SupabaseModalProps) {
   const [step, setStep] = useState<'token' | 'configure' | 'creating' | 'success'>('token');
   const [accessToken, setAccessToken] = useState('');

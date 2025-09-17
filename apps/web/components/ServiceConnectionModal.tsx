@@ -20,6 +20,25 @@ interface ServiceToken {
   last_used?: string;
 }
 
+/**
+ * Modal UI for connecting and managing provider API tokens (GitHub, Supabase, Vercel) and triggering provider-specific actions.
+ *
+ * Renders a modal that:
+ * - Loads and displays any saved token for the selected provider.
+ * - Lets the user save, update, or delete a token (calls backend /api/tokens endpoints).
+ * - When a token and projectId are present, exposes provider-specific actions:
+ *   - GitHub: create repository
+ *   - Supabase: create project (prompts for DB password)
+ *   - Vercel: deploy project
+ * - Closes when the backdrop is clicked or the Escape key is pressed.
+ *
+ * Network interactions are performed against `${API_BASE}/api/...`; user feedback is provided via alerts, prompts, and console logs.
+ *
+ * @param isOpen - Whether the modal is visible.
+ * @param onClose - Callback to close the modal.
+ * @param provider - One of `'github' | 'supabase' | 'vercel'`; selects provider-specific UI, instructions, and actions.
+ * @param projectId - Optional project identifier used to name created repos/projects and enable provider actions when present.
+ */
 export default function ServiceConnectionModal({ 
   isOpen, 
   onClose, 

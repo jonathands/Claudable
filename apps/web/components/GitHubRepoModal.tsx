@@ -12,6 +12,28 @@ interface GitHubRepoModalProps {
   onSuccess: () => void;
 }
 
+/**
+ * Modal UI for creating a GitHub repository for a given project.
+ *
+ * Displays a form to enter a repository name, optional description, and visibility (public/private),
+ * validates the repository name against GitHub-like constraints, sanitizes an initial name from
+ * the provided project name or ID, and submits a creation request to the backend.
+ *
+ * Side effects:
+ * - Sends a POST to /api/projects/{projectId}/github/connect when the form is submitted.
+ * - Calls `onSuccess()` and `onClose()` after a successful creation.
+ * - Shows user-facing alerts for success and error cases.
+ * - Listens for the Escape key to close the modal while open.
+ *
+ * Note: an availability check helper exists and its UI spinner is shown when active, but the
+ * actual availability API call is currently commented out (disabled) in the name-change effect.
+ *
+ * @param isOpen - Whether the modal is visible.
+ * @param onClose - Callback to close the modal.
+ * @param projectId - Project identifier used when creating the repository on the backend.
+ * @param projectName - Optional project name used to prefill and sanitize an initial repository name.
+ * @param onSuccess - Callback invoked after a repository is created successfully.
+ */
 export default function GitHubRepoModal({ 
   isOpen, 
   onClose, 

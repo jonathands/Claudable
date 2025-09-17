@@ -12,6 +12,19 @@ interface SettingsModalProps {
   children: ReactNode;
 }
 
+/**
+ * Right-aligned settings drawer modal.
+ *
+ * Renders a full-viewport overlay with a right-side panel containing a header (optional icon, title,
+ * and built-in close button) and a content area for `children`. When `isOpen` is false the component
+ * renders `null`.
+ *
+ * The modal calls `onClose` when the backdrop is clicked, when the header close button is clicked,
+ * or when the Escape key is pressed while open.
+ *
+ * @param onClose - Callback invoked to close the modal (triggered by backdrop click, close button, or Escape key).
+ * @returns A JSX element for the modal when open, or `null` when closed.
+ */
 export function SettingsModal({ isOpen, onClose, title, icon, children }: SettingsModalProps) {
   // Handle ESC key to close modal
   React.useEffect(() => {

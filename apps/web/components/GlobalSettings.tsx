@@ -124,6 +124,29 @@ interface ServiceToken {
   last_used?: string;
 }
 
+/**
+ * Renders the Global Settings modal and manages its related state and side effects.
+ *
+ * The component displays a modal with four tabs: "General" (appearance & preferences),
+ * "AI Agents" (CLI management, default CLI/model selection, install guides), "Services"
+ * (service token configuration for GitHub, Supabase, Vercel), and "About" (app info/links).
+ *
+ * Behavior and side effects:
+ * - Early-returns `null` when `isOpen` is false.
+ * - When opened, loads service tokens, global settings, and CLI installation status from the API.
+ * - Saves updates to global settings via a PUT request and refreshes the global settings context.
+ * - Opens a ServiceConnectionModal to add/update provider tokens and an Install Guide modal for CLIs.
+ * - Handles Escape key and backdrop clicks to close the modal via `onClose`.
+ * - Shows transient toasts and in-modal success/error messages for operations.
+ *
+ * Notes:
+ * - Reads API base from NEXT_PUBLIC_API_BASE (fallback to http://localhost:8080).
+ * - Updates global settings through the global settings context (useGlobalSettings).
+ *
+ * @param isOpen - Whether the modal is visible.
+ * @param onClose - Callback invoked to request closing the modal (also called on Escape/backdrop click).
+ * @param initialTab - Optional initial active tab: 'general' | 'ai-agents' | 'services' | 'about' (default: 'general').
+ */
 export default function GlobalSettings({ isOpen, onClose, initialTab = 'general' }: GlobalSettingsProps) {
   const { theme, toggle: toggleTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<'general' | 'ai-agents' | 'services' | 'about'>(initialTab);

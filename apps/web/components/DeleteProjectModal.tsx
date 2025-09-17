@@ -10,6 +10,21 @@ interface DeleteProjectModalProps {
   isDeleting?: boolean;
 }
 
+/**
+ * Modal dialog that prompts the user to confirm permanent deletion of a project.
+ *
+ * Renders a confirmation UI that requires the user to type `delete` (case-insensitive) into an input
+ * before the Delete action is enabled. Clicking the backdrop or pressing Escape closes the modal;
+ * closing resets the confirmation input. While `isDeleting` is true the input and actions are disabled
+ * and the Delete button shows a loading state.
+ *
+ * @param isOpen - Whether the modal is visible.
+ * @param onClose - Callback invoked when the modal should close (backdrop click, Escape, or Cancel).
+ * @param onConfirm - Callback invoked when the deletion is confirmed and the Delete button is pressed.
+ * @param projectName - Project name displayed in the confirmation message.
+ * @param isDeleting - When true, disables inputs/actions and displays the deleting state.
+ * @returns A JSX element rendering the delete confirmation modal.
+ */
 export default function DeleteProjectModal({ 
   isOpen, 
   onClose, 

@@ -151,6 +151,29 @@ interface CLIStatus {
   };
 }
 
+/**
+ * Renders the Project Settings modal for viewing and editing a project's configuration.
+ *
+ * When opened (isOpen && projectId) the component loads project metadata, available CLI
+ * configuration, connected services, and global AI settings from the API. It exposes
+ * tabs for General info, AI Assistant (read-only per-project CLI choice), Services
+ * (Supabase/Vercel), Environment Variables, and a Danger Zone for deleting the project.
+ *
+ * Side effects:
+ * - Performs multiple network requests to fetch and persist data (project info, CLI info,
+ *   service connections, global settings, CLI status). Network errors are logged and
+ *   handled with sensible fallbacks.
+ * - Triggers service actions (connect/redeploy) and a destructive project delete which
+ *   redirects to the home page on success.
+ * - Opens sub-modals: ServiceConnectionModal and GlobalSettings.
+ *
+ * @param isOpen - Whether the settings modal is visible.
+ * @param onClose - Callback invoked to close the modal (e.g., overlay or close button).
+ * @param projectId - The ID of the project being inspected/edited.
+ * @param projectName - Optional human-readable project name used in the header and prompts.
+ * @param initialTab - Optional tab to show on open; one of 'general' | 'ai-assistant' | 'services' | 'deployment' | 'danger'. Defaults to 'general'.
+ * @returns A React element containing the modal UI, or `null` when `isOpen` is false.
+ */
 export default function ProjectSettings({ isOpen, onClose, projectId, projectName, initialTab = 'general' }: ProjectSettingsProps) {
   const [activeTab, setActiveTab] = useState<'general' | 'ai-assistant' | 'services' | 'deployment' | 'danger'>(initialTab);
   const [serviceModalOpen, setServiceModalOpen] = useState(false);

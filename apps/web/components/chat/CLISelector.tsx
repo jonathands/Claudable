@@ -12,6 +12,20 @@ interface CLISelectorProps {
   onClose: () => void;
 }
 
+/**
+ * Modal UI for choosing an AI CLI from a list of options.
+ *
+ * Renders a centered modal with one selectable button per `options` entry showing name,
+ * description, availability/configuration status, and up to three model "pills".
+ * Selecting an enabled option calls `onSelect(option.id)`. The modal can be closed by
+ * the header close button, the Cancel button, or pressing Escape.
+ *
+ * @param options - Array of CLI options to display (each item should include `id`, `name`, `description`, `available`, `configured`, optional `enabled`, optional `icon`, and optional `models`).
+ * @param selected - ID of the currently selected option (applies active styling to the matching item).
+ * @param onSelect - Called with the selected option ID when a user picks an option.
+ * @param onClose - Called to close the modal; also invoked when the user presses Escape.
+ * @returns A React element representing the selector modal.
+ */
 export function CLISelector({ options, selected, onSelect, onClose }: CLISelectorProps) {
   // Handle ESC key to close modal
   React.useEffect(() => {

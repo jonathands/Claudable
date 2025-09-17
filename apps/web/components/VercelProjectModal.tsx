@@ -14,6 +14,21 @@ interface VercelProjectModalProps {
   onSuccess: () => void;
 }
 
+/**
+ * Modal UI to create a new Vercel project and link it to an existing GitHub repository.
+ *
+ * Renders a form to choose a Vercel project name, framework, and optional team ID,
+ * validates availability (temporarily disabled to always mark available), and calls
+ * the backend to create & connect the Vercel project. Handles ESC key to close,
+ * resets form state on close, and reports success via `onSuccess`.
+ *
+ * @param isOpen - Controls whether the modal is visible.
+ * @param onClose - Callback invoked to close the modal; the form is reset before calling.
+ * @param projectId - Project identifier used when calling the connect API endpoint.
+ * @param projectName - Initial value used to prefill and sanitize the Project Name field when the modal opens.
+ * @param onSuccess - Callback invoked after a successful Vercel connection (before the modal is closed).
+ * @returns The modal element when `isOpen` is true, otherwise `null`.
+ */
 export default function VercelProjectModal({ 
   isOpen, 
   onClose, 

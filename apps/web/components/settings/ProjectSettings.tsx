@@ -21,6 +21,17 @@ interface ProjectSettingsProps {
 
 type SettingsTab = 'general' | 'ai-assistant' | 'environment' | 'services';
 
+/**
+ * Renders a modal UI for editing project-scoped settings with four tabbed sections (General, Agent, Envs, Services).
+ *
+ * The component manages local tab state and can open the Global Settings modal from the Agent or Services tabs.
+ * When Global Settings is opened from Agent or Services, ProjectSettings will call the provided `onClose` callback
+ * to close the project modal and set the Global Settings initial tab accordingly (opens to `ai-agents` when invoked
+ * from the Agent tab, otherwise `services`).
+ *
+ * @param initialTab - Optional starting tab for the modal. One of `'general' | 'ai-assistant' | 'environment' | 'services'`. Defaults to `'general'`.
+ * @returns A JSX element containing the Project Settings modal.
+ */
 export function ProjectSettings({
   isOpen,
   onClose,
