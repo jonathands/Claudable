@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ServiceConnectionModal from '@/components/ServiceConnectionModal';
 import EnvironmentVariablesTab from '@/components/EnvironmentVariablesTab';
 import GlobalSettings from '@/components/GlobalSettings';
+import { X, AlertTriangle, Check, CheckCircle, Server } from 'lucide-react';
+import { ServiceLogo } from '@/components/icons/ServiceLogos';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8080';
 
@@ -534,35 +536,10 @@ export default function ProjectSettings({ isOpen, onClose, projectId, projectNam
   };
 
   const getProviderIcon = (provider: string) => {
-    switch (provider) {
-      case 'github':
-        return (
-          <svg width="16" height="16" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="currentColor"/>
-          </svg>
-        );
-      case 'supabase':
-        return (
-          <svg width="16" height="16" viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z" fill="url(#paint0_linear)"/>
-            <path d="M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z" fill="#3ECF8E"/>
-            <defs>
-              <linearGradient id="paint0_linear" x1="53.9738" y1="54.974" x2="94.1635" y2="71.8295" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#249361"/>
-                <stop offset="1" stopColor="#3ECF8E"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        );
-      case 'vercel':
-        return (
-          <svg width="16" height="16" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"/>
-          </svg>
-        );
-      default:
-        return null;
+    if (provider === 'github' || provider === 'supabase' || provider === 'vercel') {
+      return <ServiceLogo service={provider as 'github' | 'supabase' | 'vercel'} width={16} height={16} />;
     }
+    return null;
   };
 
   if (!isOpen) return null;
@@ -587,11 +564,7 @@ export default function ProjectSettings({ isOpen, onClose, projectId, projectNam
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-[#DE7356]/10 dark:bg-[#DE7356]/20 text-[#DE7356] dark:text-[#DE7356] rounded-lg flex items-center justify-center">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M8 21v-4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M21 9V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <Server className="w-5 h-5" />
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{projectName || 'Project Settings'}</h2>
@@ -605,9 +578,7 @@ export default function ProjectSettings({ isOpen, onClose, projectId, projectNam
                   onClick={onClose}
                   className="text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                 >
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
+                  <X className="w-6 h-6" />
                 </button>
               </div>
             </div>
@@ -724,9 +695,7 @@ export default function ProjectSettings({ isOpen, onClose, projectId, projectNam
                             </div>
                           </div>
                           <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M20 6L9 17L4 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
+                            <Check className="w-3 h-3" stroke="white" />
                           </div>
                         </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">
@@ -778,9 +747,7 @@ export default function ProjectSettings({ isOpen, onClose, projectId, projectNam
                 <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg">
                   <div className="flex items-start gap-3">
                     <div className="text-blue-500 dark:text-blue-400 mt-0.5">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                      </svg>
+                      <CheckCircle className="w-4 h-4" />
                     </div>
                     <div>
                       <p className="text-sm font-medium text-blue-800 dark:text-blue-200">
@@ -891,9 +858,7 @@ export default function ProjectSettings({ isOpen, onClose, projectId, projectNam
                   <div className="mt-6 p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
                     <div className="flex">
                       <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                        </svg>
+                        <AlertTriangle className="h-5 w-5 text-amber-400" />
                       </div>
                       <div className="ml-3">
                         <h3 className="text-sm font-medium text-amber-800 dark:text-amber-200">

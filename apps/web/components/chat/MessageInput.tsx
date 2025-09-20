@@ -4,6 +4,7 @@
  */
 import React, { useState, useRef, KeyboardEvent } from 'react';
 import { ImageAttachment } from '@/types/chat';
+import { ImageIcon, Send } from 'lucide-react';
 
 interface MessageInputProps {
   mode: 'chat' | 'act';
@@ -103,10 +104,7 @@ export function MessageInput({
           className="flex items-center justify-center w-8 h-8 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors cursor-pointer"
           title="Upload images"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" 
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <ImageIcon className="w-4 h-4" />
           <input
             ref={fileInputRef}
             type="file"
@@ -134,10 +132,7 @@ export function MessageInput({
           disabled={disabled || (!content.trim() && uploadedImages.length === 0)}
           className="flex items-center justify-center w-10 h-10 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" 
-                  stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <Send className="w-5 h-5" />
         </button>
       </div>
     </div>

@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { ChevronRight } from 'lucide-react';
 
 interface ProjectCardProps {
   project: {
@@ -84,9 +85,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         {/* Hover indicator */}
         <div className="mt-4 flex items-center text-sm text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity">
           <span>Open project</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" className="ml-2" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <ChevronRight className="w-4 h-4 ml-2" />
         </div>
       </div>
     </Link>

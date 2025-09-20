@@ -10,6 +10,7 @@ import { ChatHeader } from './ChatHeader';
 import { MessageList } from './MessageList';
 import { MessageInput } from './MessageInput';
 import { CLISelector } from './CLISelector';
+import { ChevronDown } from 'lucide-react';
 
 interface ChatInterfaceProps {
   projectId: string;
@@ -82,9 +83,7 @@ export function ChatInterface({ projectId, conversationId }: ChatInterfaceProps)
                 <span className="text-sm font-medium text-gray-900 dark:text-white">
                   {cliOptions.find(opt => opt.id === preference?.preferred_cli)?.name || 'Select CLI'}
                 </span>
-                <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
+                <ChevronDown className="w-4 h-4 text-gray-400" />
               </button>
             </div>
             

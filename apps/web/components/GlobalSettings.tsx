@@ -4,8 +4,9 @@ import { AnimatePresence } from 'framer-motion';
 import { MotionDiv } from '@/lib/motion';
 import { useTheme } from '@/components/ThemeProvider';
 import ServiceConnectionModal from '@/components/ServiceConnectionModal';
-import { FaCog } from 'react-icons/fa';
+import { Settings, X, Moon, Sun, Check, Copy, Info, Zap, Lightbulb } from 'lucide-react';
 import { useGlobalSettings } from '@/contexts/GlobalSettingsContext';
+import { ServiceLogo } from '@/components/icons/ServiceLogos';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8080';
 
@@ -324,35 +325,10 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
   };
 
   const getProviderIcon = (provider: string) => {
-    switch (provider) {
-      case 'github':
-        return (
-          <svg width="20" height="20" viewBox="0 0 98 96" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fillRule="evenodd" clipRule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.324-3.015.324-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.141-22.243-5.378-22.243-24.283 0-5.378 1.94-9.778 5.014-13.2-.485-1.222-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.816.485 13.038 3.155 3.422 5.015 7.822 5.015 13.2 0 18.905-11.404 23.06-22.324 24.283 1.78 1.548 3.316 4.481 3.316 9.126 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.935 33.405-46.691C97.707 22 75.788 0 48.854 0z" fill="currentColor"/>
-          </svg>
-        );
-      case 'supabase':
-        return (
-          <svg width="20" height="20" viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z" fill="url(#paint0_linear)"/>
-            <path d="M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z" fill="#3ECF8E"/>
-            <defs>
-              <linearGradient id="paint0_linear" x1="53.9738" y1="54.974" x2="94.1635" y2="71.8295" gradientUnits="userSpaceOnUse">
-                <stop stopColor="#249361"/>
-                <stop offset="1" stopColor="#3ECF8E"/>
-              </linearGradient>
-            </defs>
-          </svg>
-        );
-      case 'vercel':
-        return (
-          <svg width="20" height="20" viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"/>
-          </svg>
-        );
-      default:
-        return null;
+    if (provider === 'github' || provider === 'supabase' || provider === 'vercel') {
+      return <ServiceLogo service={provider as 'github' | 'supabase' | 'vercel'} width={20} height={20} />;
     }
+    return null;
   };
 
   if (!isOpen) return null;
@@ -377,7 +353,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span className="text-gray-600 dark:text-gray-400">
-                  <FaCog size={20} />
+                  <Settings className="w-5 h-5" />
                 </span>
                 <div>
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Global Settings</h2>
@@ -388,9 +364,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                 onClick={onClose}
                 className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                </svg>
+                <X className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -443,14 +417,9 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                         } inline-block h-5 w-5 transform rounded-full bg-white shadow-lg transition-transform flex items-center justify-center`}
                       >
                         {theme === 'dark' ? (
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="#6366f1"/>
-                          </svg>
+                          <Moon className="w-3 h-3 text-indigo-500" />
                         ) : (
-                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="12" cy="12" r="5" fill="#fbbf24"/>
-                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#fbbf24" strokeWidth="2" strokeLinecap="round"/>
-                          </svg>
+                          <Sun className="w-3 h-3 text-amber-500" />
                         )}
                       </span>
                     </button>
@@ -520,13 +489,9 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                           : 'bg-red-100 dark:bg-red-900/20 text-red-700 dark:text-red-400'
                       }`}>
                         {saveMessage.type === 'success' ? (
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
+                          <Check className="w-4 h-4" />
                         ) : (
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
+                          <X className="w-4 h-4" />
                         )}
                         {saveMessage.text}
                       </div>
@@ -691,9 +656,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                   <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-700/30 rounded-xl border border-gray-200 dark:border-gray-700">
                     <div className="flex">
                       <div className="flex-shrink-0">
-                        <svg className="h-5 w-5 text-[#DE7356]" viewBox="0 0 20 20" fill="currentColor">
-                          <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                        </svg>
+                        <Info className="h-5 w-5 text-[#DE7356]" />
                       </div>
                       <div className="ml-3">
                         <h3 className="text-sm font-medium text-gray-900 dark:text-white">
@@ -738,17 +701,13 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                   <div className="grid grid-cols-2 gap-4 text-center">
                     <div className="p-3 rounded-xl border border-gray-200/50 dark:border-white/5 bg-transparent">
                       <div className="flex items-center justify-center mb-2">
-                        <svg className="w-5 h-5 text-[#DE7356]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
+                        <Zap className="w-5 h-5 text-[#DE7356]" />
                       </div>
                       <p className="text-xs font-medium text-gray-700 dark:text-white/80">Fast Deploy</p>
                     </div>
                     <div className="p-3 rounded-xl border border-gray-200/50 dark:border-white/5 bg-transparent">
                       <div className="flex items-center justify-center mb-2">
-                        <svg className="w-5 h-5 text-[#DE7356]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
+                        <Lightbulb className="w-5 h-5 text-[#DE7356]" />
                       </div>
                       <p className="text-xs font-medium text-gray-700 dark:text-white/80">AI Powered</p>
                     </div>
@@ -797,9 +756,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
         }`}>
           <div className="flex items-center gap-2">
             {toast.type === 'success' && (
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+              <Check className="w-5 h-5" />
             )}
             <span className="font-medium">{toast.message}</span>
           </div>
@@ -850,9 +807,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                   }}
                   className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
+                  <X className="w-5 h-5" />
                 </button>
               </div>
             </div>
@@ -882,9 +837,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                     className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     title="Copy command"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 3h10a2 2 0 012 2v10M9 3H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-2M9 3v2a2 2 0 002 2h6a2 2 0 002-2V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <Copy className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -925,9 +878,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                     className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     title="Copy command"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 3h10a2 2 0 012 2v10M9 3H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-2M9 3v2a2 2 0 002 2h6a2 2 0 002-2V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <Copy className="w-4 h-4" />
                   </button>
                 </div>
               </div>
@@ -964,9 +915,7 @@ export default function GlobalSettings({ isOpen, onClose, initialTab = 'general'
                     className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                     title="Copy command"
                   >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 3h10a2 2 0 012 2v10M9 3H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-2M9 3v2a2 2 0 002 2h6a2 2 0 002-2V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <Copy className="w-4 h-4" />
                   </button>
                 </div>
               </div>

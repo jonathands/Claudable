@@ -3,7 +3,7 @@
  * Main settings modal with tabs
  */
 import React, { useState } from 'react';
-import { FaCog, FaRobot, FaLock, FaPlug } from 'react-icons/fa';
+import { Settings, Bot, Lock, Plug } from 'lucide-react';
 import { SettingsModal } from './SettingsModal';
 import { GeneralSettings } from './GeneralSettings';
 import { AIAssistantSettings } from './AIAssistantSettings';
@@ -32,10 +32,10 @@ export function ProjectSettings({
   const [showGlobalSettings, setShowGlobalSettings] = useState(false);
 
   const tabs: { id: SettingsTab; label: string; icon: React.ReactElement }[] = [
-    { id: 'general', label: 'General', icon: <span className="w-4 h-4 inline-flex"><FaCog /></span> },
-    { id: 'ai-assistant', label: 'Agent', icon: <span className="w-4 h-4 inline-flex"><FaRobot /></span> },
-    { id: 'environment', label: 'Envs', icon: <span className="w-4 h-4 inline-flex"><FaLock /></span> },
-    { id: 'services', label: 'Services', icon: <span className="w-4 h-4 inline-flex"><FaPlug /></span> }
+    { id: 'general', label: 'General', icon: <span className="w-4 h-4 inline-flex"><Settings className="w-4 h-4" /></span> },
+    { id: 'ai-assistant', label: 'Agent', icon: <span className="w-4 h-4 inline-flex"><Bot className="w-4 h-4" /></span> },
+    { id: 'environment', label: 'Envs', icon: <span className="w-4 h-4 inline-flex"><Lock className="w-4 h-4" /></span> },
+    { id: 'services', label: 'Services', icon: <span className="w-4 h-4 inline-flex"><Plug className="w-4 h-4" /></span> }
   ];
 
   return (
@@ -44,10 +44,7 @@ export function ProjectSettings({
       isOpen={isOpen}
       onClose={onClose}
       title="Project Settings"
-      icon={<svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      </svg>}
+      icon={<Settings className="w-6 h-6" />}
     >
       <div className="flex h-full">
         {/* Sidebar Tabs */}

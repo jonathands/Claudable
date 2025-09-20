@@ -4,7 +4,8 @@ import { AnimatePresence } from 'framer-motion';
 import { MotionDiv, MotionH3, MotionP, MotionButton } from '../../../lib/motion';
 import { useRouter, useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
-import { FaCode, FaDesktop, FaMobileAlt, FaPlay, FaStop, FaSync, FaCog, FaRocket, FaFolder, FaFolderOpen, FaFile, FaFileCode, FaCss3Alt, FaHtml5, FaJs, FaReact, FaPython, FaDocker, FaGitAlt, FaMarkdown, FaDatabase, FaPhp, FaJava, FaRust, FaVuejs, FaLock, FaHome, FaChevronUp, FaChevronRight, FaChevronDown, FaArrowLeft, FaArrowRight, FaRedo } from 'react-icons/fa';
+import { FaCss3Alt, FaHtml5, FaJs, FaReact, FaPython, FaDocker, FaGitAlt, FaMarkdown, FaDatabase, FaPhp, FaJava, FaRust, FaVuejs } from 'react-icons/fa';
+import { Code, Monitor, Smartphone, Play, Square, RefreshCw, Settings, Rocket, Folder, FolderOpen, File, FileCode, Lock, Home, ChevronUp, ChevronRight, ChevronDown, ArrowLeft, ArrowRight, RotateCcw, X, AlertTriangle, Info } from 'lucide-react';
 import { SiTypescript, SiGo, SiRuby, SiSvelte, SiJson, SiYaml, SiCplusplus } from 'react-icons/si';
 import { VscJson } from 'react-icons/vsc';
 import ChatLog from '../../../components/ChatLog';
@@ -106,8 +107,8 @@ function TreeView({ entries, selectedFile, expandedFolders, folderContents, onTo
               <div className="w-4 flex items-center justify-center mr-0.5">
                 {entry.type === 'dir' && (
                   isExpanded ? 
-                    <span className="w-2.5 h-2.5 text-gray-600 dark:text-[#8b8b8b] flex items-center justify-center"><FaChevronDown size={10} /></span> : 
-                    <span className="w-2.5 h-2.5 text-gray-600 dark:text-[#8b8b8b] flex items-center justify-center"><FaChevronRight size={10} /></span>
+                    <span className="w-2.5 h-2.5 text-gray-600 dark:text-[#8b8b8b] flex items-center justify-center"><ChevronDown className="w-2.5 h-2.5" /></span> : 
+                    <span className="w-2.5 h-2.5 text-gray-600 dark:text-[#8b8b8b] flex items-center justify-center"><ChevronRight className="w-2.5 h-2.5" /></span>
                 )}
               </div>
               
@@ -115,8 +116,8 @@ function TreeView({ entries, selectedFile, expandedFolders, folderContents, onTo
               <span className="w-4 h-4 flex items-center justify-center mr-1.5">
                 {entry.type === 'dir' ? (
                   isExpanded ? 
-                    <span className="text-amber-600 dark:text-[#c09553] w-4 h-4 flex items-center justify-center"><FaFolderOpen size={16} /></span> : 
-                    <span className="text-amber-600 dark:text-[#c09553] w-4 h-4 flex items-center justify-center"><FaFolder size={16} /></span>
+                    <span className="text-amber-600 dark:text-[#c09553] w-4 h-4 flex items-center justify-center"><FolderOpen className="w-4 h-4" /></span> : 
+                    <span className="text-amber-600 dark:text-[#c09553] w-4 h-4 flex items-center justify-center"><Folder className="w-4 h-4" /></span>
                 ) : (
                   getFileIcon(entry)
                 )}
@@ -688,7 +689,7 @@ export default function ChatPage({ params }: Params) {
   // Get file icon based on type
   function getFileIcon(entry: Entry): React.ReactElement {
     if (entry.type === 'dir') {
-      return <span className="text-blue-500"><FaFolder size={16} /></span>;
+      return <span className="text-blue-500"><Folder className="w-4 h-4" /></span>;
     }
     
     const ext = entry.path.split('.').pop()?.toLowerCase();
@@ -697,9 +698,9 @@ export default function ChatPage({ params }: Params) {
     // Special files
     if (filename === 'package.json') return <span className="text-green-600"><VscJson size={16} /></span>;
     if (filename === 'dockerfile') return <span className="text-blue-400"><FaDocker size={16} /></span>;
-    if (filename?.startsWith('.env')) return <span className="text-yellow-500"><FaLock size={16} /></span>;
+    if (filename?.startsWith('.env')) return <span className="text-yellow-500"><Lock className="w-4 h-4" /></span>;
     if (filename === 'readme.md') return <span className="text-gray-600"><FaMarkdown size={16} /></span>;
-    if (filename?.includes('config')) return <span className="text-gray-500"><FaCog size={16} /></span>;
+    if (filename?.includes('config')) return <span className="text-gray-500"><Settings className="w-4 h-4" /></span>;
     
     switch (ext) {
       case 'tsx':
@@ -728,12 +729,12 @@ export default function ChatPage({ params }: Params) {
         return <span className="text-blue-400"><FaPython size={16} /></span>;
       case 'sh':
       case 'bash':
-        return <span className="text-green-500"><FaFileCode size={16} /></span>;
+        return <span className="text-green-500"><FileCode className="w-4 h-4" /></span>;
       case 'yaml':
       case 'yml':
         return <span className="text-red-500"><SiYaml size={16} /></span>;
       case 'xml':
-        return <span className="text-orange-600"><FaFileCode size={16} /></span>;
+        return <span className="text-orange-600"><FileCode className="w-4 h-4" /></span>;
       case 'sql':
         return <span className="text-blue-600"><FaDatabase size={16} /></span>;
       case 'php':
@@ -741,7 +742,7 @@ export default function ChatPage({ params }: Params) {
       case 'java':
         return <span className="text-red-600"><FaJava size={16} /></span>;
       case 'c':
-        return <span className="text-blue-700"><FaFileCode size={16} /></span>;
+        return <span className="text-blue-700"><FileCode className="w-4 h-4" /></span>;
       case 'cpp':
       case 'cc':
       case 'cxx':
@@ -762,9 +763,9 @@ export default function ChatPage({ params }: Params) {
       case 'ini':
       case 'conf':
       case 'config':
-        return <span className="text-gray-500"><FaCog size={16} /></span>;
+        return <span className="text-gray-500"><Settings className="w-4 h-4" /></span>;
       default:
-        return <span className="text-gray-400"><FaFile size={16} /></span>;
+        return <span className="text-gray-400"><File className="w-4 h-4" /></span>;
     }
   }
 
@@ -1431,9 +1432,7 @@ export default function ChatPage({ params }: Params) {
                   className="flex items-center justify-center w-8 h-8 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors"
                   title="Back to home"
                 >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                  <ArrowLeft className="w-4 h-4" />
                 </button>
                 <div>
                   <h1 className="text-lg font-semibold text-gray-900 dark:text-white">{projectName || 'Loading...'}</h1>
@@ -1505,7 +1504,7 @@ export default function ChatPage({ params }: Params) {
                       }`}
                       onClick={() => setShowPreview(true)}
                     >
-                      <span className="w-4 h-4 flex items-center justify-center"><FaDesktop size={16} /></span>
+                      <span className="w-4 h-4 flex items-center justify-center"><Monitor className="w-4 h-4" /></span>
                     </button>
                     <button
                       className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
@@ -1515,7 +1514,7 @@ export default function ChatPage({ params }: Params) {
                       }`}
                       onClick={() => setShowPreview(false)}
                     >
-                      <span className="w-4 h-4 flex items-center justify-center"><FaCode size={16} /></span>
+                      <span className="w-4 h-4 flex items-center justify-center"><Code className="w-4 h-4" /></span>
                     </button>
                   </div>
                   
@@ -1525,7 +1524,7 @@ export default function ChatPage({ params }: Params) {
                       {/* Route Navigation */}
                       <div className="h-9 flex items-center bg-gray-100 dark:bg-gray-900 rounded-lg px-3 border border-gray-200 dark:border-gray-700">
                         <span className="text-gray-400 dark:text-gray-500 mr-2">
-                          <FaHome size={12} />
+                          <Home className="w-3 h-3" />
                         </span>
                         <span className="text-sm text-gray-500 dark:text-gray-400 mr-1">/</span>
                         <input
@@ -1547,7 +1546,7 @@ export default function ChatPage({ params }: Params) {
                           onClick={() => navigateToRoute(currentRoute)}
                           className="ml-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
                         >
-                          <FaArrowRight size={12} />
+                          <ArrowRight className="w-3 h-3" />
                         </button>
                       </div>
                       
@@ -1563,7 +1562,7 @@ export default function ChatPage({ params }: Params) {
                           }}
                           title="Refresh preview"
                         >
-                          <FaRedo size={14} />
+                          <RotateCcw className="w-3.5 h-3.5" />
                         </button>
                         
                         {/* Device Mode Toggle */}
@@ -1577,7 +1576,7 @@ export default function ChatPage({ params }: Params) {
                             }`}
                             onClick={() => setDeviceMode('desktop')}
                           >
-                            <FaDesktop size={14} />
+                            <Monitor className="w-3.5 h-3.5" />
                           </button>
                           <button
                             aria-label="Mobile preview"
@@ -1588,7 +1587,7 @@ export default function ChatPage({ params }: Params) {
                             }`}
                             onClick={() => setDeviceMode('mobile')}
                           >
-                            <FaMobileAlt size={14} />
+                            <Smartphone className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
@@ -1603,7 +1602,7 @@ export default function ChatPage({ params }: Params) {
                     className="h-9 w-9 flex items-center justify-center bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-200 dark:hover:bg-gray-800 rounded-lg transition-colors"
                     title="Settings"
                   >
-                    <FaCog size={16} />
+                    <Settings className="w-4 h-4" />
                   </button>
                   
                   {/* Stop Button */}
@@ -1612,7 +1611,7 @@ export default function ChatPage({ params }: Params) {
                       className="h-9 px-3 bg-red-500 hover:bg-red-600 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2"
                       onClick={stop}
                     >
-                      <FaStop size={12} />
+                      <Square className="w-3 h-3" />
                       Stop
                     </button>
                   )}
@@ -1624,7 +1623,7 @@ export default function ChatPage({ params }: Params) {
                       className="h-9 flex items-center gap-2 px-3 bg-black text-white rounded-lg text-sm font-medium transition-colors hover:bg-gray-900 border border-black/10 dark:border-white/10 shadow-sm"
                       onClick={() => setShowPublishPanel(true)}
                     >
-                      <FaRocket size={14} />
+                      <Rocket className="w-3.5 h-3.5" />
                       Publish
                       {deploymentStatus === 'deploying' && (
                         <span className="ml-2 inline-block w-2 h-2 rounded-full bg-amber-400"></span>
@@ -1676,17 +1675,13 @@ export default function ChatPage({ params }: Params) {
                               <div className="space-y-2">
                                 {!githubConnected && (
                                   <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400">
-                                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                    </svg>
+                                    <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                                     <span className="text-sm">GitHub repository not connected</span>
                                   </div>
                                 )}
                                 {!vercelConnected && (
                                   <div className="flex items-center gap-2 text-amber-700 dark:text-amber-400">
-                                    <svg className="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                                    </svg>
+                                    <AlertTriangle className="w-4 h-4 flex-shrink-0" />
                                     <span className="text-sm">Vercel project not connected</span>
                                   </div>
                                 )}
@@ -1858,10 +1853,7 @@ export default function ChatPage({ params }: Params) {
                             if (overlay) overlay.style.display = 'none';
                           }}
                         >
-                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1 4v6h6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                            <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                          </svg>
+                          <RefreshCw className="w-4 h-4" />
                           Refresh Now
                         </button>
                       </div>
@@ -2056,7 +2048,7 @@ export default function ChatPage({ params }: Params) {
                                     whileHover={{ scale: 1.2 }}
                                     whileTap={{ scale: 0.9 }}
                                   >
-                                    <FaPlay 
+                                    <Play className="w-3 h-3"
                                       size={32}
                                     />
                                   </MotionDiv>
@@ -2176,7 +2168,7 @@ export default function ChatPage({ params }: Params) {
                     /* Welcome Screen */
                     <div className="flex-1 flex items-center justify-center bg-white dark:bg-[#0d0d0d]">
                       <div className="text-center">
-                        <span className="w-16 h-16 mb-4 opacity-10 text-gray-400 dark:text-[#3c3c3c] mx-auto flex items-center justify-center"><FaCode size={64} /></span>
+                        <span className="w-16 h-16 mb-4 opacity-10 text-gray-400 dark:text-[#3c3c3c] mx-auto flex items-center justify-center"><Code className="w-16 h-16" /></span>
                         <h3 className="text-lg font-medium text-gray-700 dark:text-[#cccccc] mb-2">
                           Welcome to Code Editor
                         </h3>
@@ -2205,7 +2197,7 @@ export default function ChatPage({ params }: Params) {
               <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between bg-gray-50/60 dark:bg-white/5">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white bg-black border border-black/10 dark:border-white/10">
-                  <FaRocket size={14} />
+                  <Rocket className="w-3.5 h-3.5" />
                 </div>
                 <div>
                   <h3 className="text-base font-semibold text-gray-900 dark:text-white">Publish Project</h3>
@@ -2213,7 +2205,7 @@ export default function ChatPage({ params }: Params) {
                 </div>
               </div>
               <button onClick={() => setShowPublishPanel(false)} className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+                <X className="w-5 h-5" />
               </button>
             </div>
 

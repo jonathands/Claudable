@@ -4,6 +4,8 @@
  */
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { X, Check } from 'lucide-react';
+import { ServiceLogo } from '@/components/icons/ServiceLogos';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8080';
 
@@ -336,16 +338,7 @@ export default function SupabaseModal({ isOpen, onClose, projectId, projectName,
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
           <div className="flex items-center gap-3">
-            <svg width="24" height="24" viewBox="0 0 109 113" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M63.7076 110.284C60.8481 113.885 55.0502 111.912 54.9813 107.314L53.9738 40.0627L99.1935 40.0627C107.384 40.0627 111.952 49.5228 106.859 55.9374L63.7076 110.284Z" fill="url(#paint0_linear)"/>
-              <path d="M45.317 2.07103C48.1765 -1.53037 53.9745 0.442937 54.0434 5.041L54.4849 72.2922H9.83113C1.64038 72.2922 -2.92775 62.8321 2.1655 56.4175L45.317 2.07103Z" fill="#3ECF8E"/>
-              <defs>
-                <linearGradient id="paint0_linear" x1="53.9738" y1="54.974" x2="94.1635" y2="71.8295" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#249361"/>
-                  <stop offset="1" stopColor="#3ECF8E"/>
-                </linearGradient>
-              </defs>
-            </svg>
+            <ServiceLogo service="supabase" width={24} height={24} />
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Connect Supabase
             </h2>
@@ -354,9 +347,7 @@ export default function SupabaseModal({ isOpen, onClose, projectId, projectName,
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6L18 18"/>
-            </svg>
+            <X className="w-5 h-5" />
           </button>
         </div>
 
@@ -538,9 +529,7 @@ export default function SupabaseModal({ isOpen, onClose, projectId, projectName,
                   exit={{ opacity: 0, x: -20 }}
                 >
                 <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                  </svg>
+                  <Check className="w-8 h-8 text-green-600 dark:text-green-400" />
                 </div>
                 <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
                   Supabase Connected!

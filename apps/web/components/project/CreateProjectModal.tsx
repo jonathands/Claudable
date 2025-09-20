@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import { ProjectBasicInfo } from './wizard/ProjectBasicInfo';
 import { ProjectTemplate } from './wizard/ProjectTemplate';
 import { ProjectCLISetup } from './wizard/ProjectCLISetup';
+import { X } from 'lucide-react';
 
 interface CreateProjectModalProps {
   isOpen: boolean;
@@ -162,9 +163,7 @@ export function CreateProjectModal({
                 onClick={handleClose}
                 className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
               >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <X className="w-6 h-6" />
               </button>
             </div>
 

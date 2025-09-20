@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AnimatePresence } from 'framer-motion';
 import { MotionDiv, MotionP } from '../lib/motion';
+import { X, ImageIcon, Globe, Check, ChevronDown } from 'lucide-react';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8080';
 const WS_BASE = process.env.NEXT_PUBLIC_WS_BASE || 'ws://localhost:8080';
@@ -561,9 +562,7 @@ export default function CreateProjectModal({ open, onClose, onCreated, onOpenGlo
             onClick={onClose}
             className="p-2 transition-colors text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <X className="w-5 h-5" />
           </button>
         </div>
 
@@ -621,11 +620,7 @@ export default function CreateProjectModal({ open, onClose, onCreated, onOpenGlo
                   }`}
                   title="Add reference image"
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2"/>
-                    <circle cx="8.5" cy="8.5" r="1.5" stroke="currentColor" strokeWidth="2"/>
-                    <polyline points="21,15 16,10 5,21" stroke="currentColor" strokeWidth="2"/>
-                  </svg>
+                  <ImageIcon className="w-[18px] h-[18px]" />
                 </button>
 
                 {/* Website URL Button */}
@@ -638,11 +633,7 @@ export default function CreateProjectModal({ open, onClose, onCreated, onOpenGlo
                   }`}
                   title="Add reference website"
                 >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                    <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" strokeWidth="2"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="currentColor" strokeWidth="2"/>
-                  </svg>
+                  <Globe className="w-[18px] h-[18px]" />
                 </button>
               </div>
 
@@ -718,9 +709,7 @@ export default function CreateProjectModal({ open, onClose, onCreated, onOpenGlo
                     : 'border-gray-300 dark:border-gray-600'
                 }`}>
                   {useDefaultSettings && (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="text-white dark:text-gray-900">
-                      <path d="M20 6L9 17L4 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    <Check className="w-4 h-4 text-white dark:text-gray-900" />
                   )}
                 </div>
               </button>
@@ -773,9 +762,7 @@ export default function CreateProjectModal({ open, onClose, onCreated, onOpenGlo
                           <div className="text-xs text-gray-500 dark:text-gray-400">{selectedCLIOption?.description}</div>
                         </div>
                       </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`transition-transform ${showCLIDropdown ? 'rotate-180' : ''}`}>
-                        <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${showCLIDropdown ? 'rotate-180' : ''}`} />
                     </button>
 
                     <AnimatePresence>
@@ -842,9 +829,7 @@ export default function CreateProjectModal({ open, onClose, onCreated, onOpenGlo
                         </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400">{selectedModelOption?.description}</div>
                       </div>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={`transition-transform ${showModelDropdown ? 'rotate-180' : ''}`}>
-                        <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                      <ChevronDown className={`w-4 h-4 transition-transform ${showModelDropdown ? 'rotate-180' : ''}`} />
                     </button>
 
                     <AnimatePresence>

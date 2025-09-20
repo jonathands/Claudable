@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import { CLIOption } from '@/types/cli';
+import { X, Check } from 'lucide-react';
 
 interface CLISelectorProps {
   options: CLIOption[];
@@ -39,9 +40,7 @@ export function CLISelector({ options, selected, onSelect, onClose }: CLISelecto
               onClick={onClose}
               className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="w-6 h-6" />
             </button>
           </div>
         </div>
@@ -79,9 +78,7 @@ export function CLISelector({ options, selected, onSelect, onClose }: CLISelecto
                 
                 <div className="flex flex-col items-end gap-1">
                   {selected === option.id && (
-                    <svg className="w-5 h-5 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
+                    <Check className="w-5 h-5 text-blue-500" />
                   )}
                   
                   {!option.available && (

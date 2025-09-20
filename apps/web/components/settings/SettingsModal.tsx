@@ -3,6 +3,7 @@
  * Provides modal wrapper for settings
  */
 import React, { ReactNode } from 'react';
+import { X } from 'lucide-react';
 
 interface SettingsModalProps {
   isOpen: boolean;
@@ -59,9 +60,7 @@ export function SettingsModal({ isOpen, onClose, title, icon, children }: Settin
               onClick={onClose}
               className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-all"
             >
-              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
